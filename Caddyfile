@@ -1,0 +1,24 @@
+vault.home.vathzen.in {
+    encode gzip
+    
+    reverse_proxy vaultwarden:80 {
+        header_up X-Real-IP {remote_host}
+    }
+}
+
+calibre.home.vathzen.in {
+    encode gzip
+    
+    reverse_proxy calibre-web:8083
+}
+
+portainer.home.vathzen.in {
+    encode gzip
+    
+    reverse_proxy https://portainer:9443 {
+        transport http {
+            tls_insecure_skip_verify
+        }
+    }
+}
+
